@@ -23,9 +23,9 @@ export function NeuralNetworkBackground() {
 
     let animationFrameId: number
     let nodes: Node[] = []
-    const nodeCount = 100
-    const connectionDistance = 180
-    const mouseRadius = 150
+    const nodeCount = 60 // Menos nos para nao poluir
+    const connectionDistance = 200
+    const mouseRadius = 120
 
     const mouse = { x: -1000, y: -1000 }
 
@@ -40,47 +40,47 @@ export function NeuralNetworkBackground() {
         nodes.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          radius: Math.random() * 2.5 + 1.5,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          radius: Math.random() * 3 + 2,
           pulsePhase: Math.random() * Math.PI * 2,
         })
       }
     }
 
     const drawNode = (node: Node, time: number) => {
-      const pulse = Math.sin(time * 0.002 + node.pulsePhase) * 0.5 + 0.5
-      const alpha = 0.5 + pulse * 0.4
-      const radius = node.radius + pulse * 2
+      const pulse = Math.sin(time * 0.0015 + node.pulsePhase) * 0.5 + 0.5
+      const alpha = 0.25 + pulse * 0.25 // Mais transparente
+      const radius = node.radius + pulse * 1.5
 
-      // Outer glow - more intense red
+      // Outer glow - vermelho suave
       const gradient = ctx.createRadialGradient(
         node.x,
         node.y,
         0,
         node.x,
         node.y,
-        radius * 5
+        radius * 6
       )
-      gradient.addColorStop(0, `rgba(255, 0, 0, ${alpha * 0.9})`)
-      gradient.addColorStop(0.4, `rgba(255, 0, 0, ${alpha * 0.4})`)
-      gradient.addColorStop(1, "rgba(255, 0, 0, 0)")
+      gradient.addColorStop(0, `rgba(220, 38, 38, ${alpha * 0.5})`)
+      gradient.addColorStop(0.3, `rgba(220, 38, 38, ${alpha * 0.2})`)
+      gradient.addColorStop(1, "rgba(220, 38, 38, 0)")
 
       ctx.beginPath()
-      ctx.arc(node.x, node.y, radius * 5, 0, Math.PI * 2)
+      ctx.arc(node.x, node.y, radius * 6, 0, Math.PI * 2)
       ctx.fillStyle = gradient
       ctx.fill()
 
-      // Core - bright red
+      // Core - vermelho intenso
       ctx.beginPath()
       ctx.arc(node.x, node.y, radius, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(255, 30, 30, ${alpha})`
+      ctx.fillStyle = `rgba(220, 38, 38, ${alpha * 0.7})`
       ctx.fill()
 
       // Inner bright spot
       ctx.beginPath()
-      ctx.arc(node.x, node.y, radius * 0.5, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(255, 100, 100, ${alpha})`
+      ctx.arc(node.x, node.y, radius * 0.4, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(248, 113, 113, ${alpha * 0.8})`
       ctx.fill()
     }
 
@@ -90,14 +90,14 @@ export function NeuralNetworkBackground() {
       distance: number,
       time: number
     ) => {
-      const alpha = (1 - distance / connectionDistance) * 0.5
-      const pulse = Math.sin(time * 0.001) * 0.2 + 0.8
+      const alpha = (1 - distance / connectionDistance) * 0.2 // Mais transparente
+      const pulse = Math.sin(time * 0.001) * 0.15 + 0.85
 
       // Main connection line
       ctx.beginPath()
       ctx.moveTo(node1.x, node1.y)
       ctx.lineTo(node2.x, node2.y)
-      ctx.strokeStyle = `rgba(255, 0, 0, ${alpha * pulse})`
+      ctx.strokeStyle = `rgba(220, 38, 38, ${alpha * pulse})`
       ctx.lineWidth = 1
       ctx.stroke()
 
@@ -105,8 +105,8 @@ export function NeuralNetworkBackground() {
       ctx.beginPath()
       ctx.moveTo(node1.x, node1.y)
       ctx.lineTo(node2.x, node2.y)
-      ctx.strokeStyle = `rgba(255, 50, 50, ${alpha * pulse * 0.3})`
-      ctx.lineWidth = 3
+      ctx.strokeStyle = `rgba(220, 38, 38, ${alpha * pulse * 0.2})`
+      ctx.lineWidth = 4
       ctx.stroke()
     }
 
@@ -118,8 +118,8 @@ export function NeuralNetworkBackground() {
 
       if (dist < mouseRadius) {
         const force = (mouseRadius - dist) / mouseRadius
-        node.vx -= (dx / dist) * force * 0.02
-        node.vy -= (dy / dist) * force * 0.02
+        node.vx -= (dx / dist) * force * 0.015
+        node.vy -= (dy / dist) * force * 0.015
       }
 
       // Update position
@@ -135,8 +135,8 @@ export function NeuralNetworkBackground() {
       node.y = Math.max(0, Math.min(canvas.height, node.y))
 
       // Damping
-      node.vx *= 0.995
-      node.vy *= 0.995
+      node.vx *= 0.998
+      node.vy *= 0.998
     }
 
     const animate = (time: number) => {
@@ -199,8 +199,11 @@ export function NeuralNetworkBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0"
-      style={{ background: "linear-gradient(180deg, #ffffff 0%, #f8f8f8 50%, #f0f0f0 100%)" }}
+      className="pointer-events-none fixed inset-0"
+      style={{ 
+        zIndex: 0,
+        background: "linear-gradient(180deg, #fafafa 0%, #f5f5f5 50%, #f0f0f0 100%)" 
+      }}
     />
   )
 }
