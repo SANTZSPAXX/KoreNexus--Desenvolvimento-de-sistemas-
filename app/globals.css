@@ -3,64 +3,42 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Cyberpunk Kore Nexus Theme - Dark Mode with Neon Red */
+/* Kore Nexus Theme - White Mode with Red Neural Web */
 :root {
-  --background: oklch(0.08 0.01 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.12 0.01 15);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.1 0.01 0);
-  --popover-foreground: oklch(0.95 0 0);
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.15 0.01 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.01 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.01 0);
   --primary: oklch(0.55 0.25 25);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.15 0.02 20);
-  --secondary-foreground: oklch(0.9 0 0);
-  --muted: oklch(0.18 0.01 0);
-  --muted-foreground: oklch(0.65 0 0);
+  --secondary: oklch(0.96 0.01 0);
+  --secondary-foreground: oklch(0.2 0.01 0);
+  --muted: oklch(0.95 0.01 0);
+  --muted-foreground: oklch(0.45 0.01 0);
   --accent: oklch(0.55 0.25 25);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.55 0.28 25);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.22 0.04 20);
-  --input: oklch(0.15 0.02 15);
+  --border: oklch(0.9 0.01 0);
+  --input: oklch(0.96 0.01 0);
   --ring: oklch(0.55 0.25 25);
   --chart-1: oklch(0.55 0.25 25);
-  --chart-2: oklch(0.65 0.2 30);
-  --chart-3: oklch(0.45 0.2 20);
+  --chart-2: oklch(0.5 0.2 280);
+  --chart-3: oklch(0.55 0.2 250);
   --chart-4: oklch(0.7 0.15 35);
   --chart-5: oklch(0.5 0.22 22);
   --radius: 0.5rem;
   
-  /* Custom Cyberpunk Variables */
+  /* Custom Kore Nexus Variables */
   --neon-red: #ff0000;
   --neon-red-dark: #cc0000;
   --neon-red-glow: rgba(255, 0, 0, 0.6);
-  --cyber-dark: #0a0a0a;
-  --cyber-darker: #050505;
-  --cyber-gray: #1a1a1a;
-  --cyber-light-gray: #2a2a2a;
-}
-
-.dark {
-  --background: oklch(0.08 0.01 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.12 0.01 15);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.1 0.01 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.55 0.25 25);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.15 0.02 20);
-  --secondary-foreground: oklch(0.9 0 0);
-  --muted: oklch(0.18 0.01 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.55 0.25 25);
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.55 0.28 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.22 0.04 20);
-  --input: oklch(0.15 0.02 15);
-  --ring: oklch(0.55 0.25 25);
+  --purple-brand: #7B2CBF;
+  --blue-brand: #2563EB;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.5);
 }
 
 @theme inline {
@@ -105,20 +83,50 @@
   }
 }
 
-/* Cyberpunk Glow Effects */
+/* Glassmorphism Effects */
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 200, 200, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 0, 0, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(255, 0, 0, 0.1);
+}
+
+/* Neon Glow Effects */
 .neon-glow {
   box-shadow: 
     0 0 5px var(--neon-red),
     0 0 10px var(--neon-red),
-    0 0 20px var(--neon-red-glow),
-    0 0 40px var(--neon-red-glow);
+    0 0 20px var(--neon-red-glow);
 }
 
 .neon-glow-text {
   text-shadow: 
     0 0 5px var(--neon-red),
-    0 0 10px var(--neon-red),
-    0 0 20px var(--neon-red-glow);
+    0 0 10px var(--neon-red);
 }
 
 .neon-border {
@@ -128,18 +136,16 @@
     inset 0 0 5px var(--neon-red-glow);
 }
 
-.cyber-card {
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
-  border: 1px solid rgba(255, 0, 0, 0.2);
-  transition: all 0.3s ease;
+/* Brand Gradient */
+.brand-gradient {
+  background: linear-gradient(135deg, #7B2CBF 0%, #2563EB 100%);
 }
 
-.cyber-card:hover {
-  border-color: var(--neon-red);
-  box-shadow: 
-    0 0 10px var(--neon-red-glow),
-    0 0 20px rgba(255, 0, 0, 0.3),
-    inset 0 0 10px rgba(255, 0, 0, 0.1);
+.brand-gradient-text {
+  background: linear-gradient(135deg, #7B2CBF 0%, #2563EB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Scrollbar Styling */
@@ -149,20 +155,20 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--cyber-dark);
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--neon-red-dark);
+  background: linear-gradient(180deg, #7B2CBF, #2563EB);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-red);
+  background: linear-gradient(180deg, #9333EA, #3B82F6);
 }
 
 /* Selection */
 ::selection {
-  background: var(--neon-red);
+  background: #7B2CBF;
   color: white;
 }

@@ -136,8 +136,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0a0a0a" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#ffffff" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -195,7 +195,8 @@ export default function RootLayout({
                 ],
                 contactPoint: {
                   "@type": "ContactPoint",
-                  telephone: "+55-11-99999-9999",
+                  telephone: "+55-11-98938-7263",
+                  email: "Ohany@knexus.qzz.io",
                   contactType: "sales",
                   availableLanguage: "Portuguese",
                 },

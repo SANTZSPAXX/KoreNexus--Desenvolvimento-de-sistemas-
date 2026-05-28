@@ -2,17 +2,22 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, MessageCircle, Zap } from "lucide-react"
+import { Menu, X, MessageCircle, Phone, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
   { href: "#produtividade", label: "Produtividade" },
-  { href: "#comunicacao", label: "Comunicação & IA" },
-  { href: "#automacao", label: "Automação Comercial" },
-  { href: "#utilitarios", label: "Utilitários" },
-  { href: "#institucional", label: "Sobre Nós" },
+  { href: "#comunicacao", label: "Comunicacao & IA" },
+  { href: "#automacao", label: "Automacao Comercial" },
+  { href: "#utilitarios", label: "Utilitarios" },
+  { href: "#institucional", label: "Sobre Nos" },
 ]
+
+const WHATSAPP_NUMBER = "5511989387263"
+const WHATSAPP_MESSAGE = "Ola! Gostaria de saber mais sobre a Kore Nexus"
+const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,17 +27,19 @@ export function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed left-0 right-0 top-0 z-50 border-b border-red-900/30 bg-black/80 backdrop-blur-xl"
+      className="fixed left-0 right-0 top-0 z-50 glass-strong"
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-2">
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-lg border border-red-600/50 bg-gradient-to-br from-red-900/50 to-black transition-all duration-300 group-hover:border-red-500 group-hover:shadow-[0_0_20px_rgba(255,0,0,0.4)]">
-            <Zap className="h-5 w-5 text-red-500 transition-colors group-hover:text-red-400" />
-          </div>
-          <span className="bg-gradient-to-r from-white via-red-200 to-red-500 bg-clip-text text-xl font-bold tracking-tight text-transparent">
-            Kore Nexus
-          </span>
+          <Image
+            src="/logo-korenexus.png"
+            alt="Kore Nexus - Desenvolvimento de Software sob Medida"
+            width={180}
+            height={50}
+            className="h-12 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -41,28 +48,34 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="group relative px-4 py-2 text-sm font-medium text-gray-300 transition-colors hover:text-white"
+              className="group relative px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
             >
               {link.label}
-              <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-red-500 transition-all duration-300 group-hover:w-full" />
+              <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
         </div>
 
-        {/* CTA Button */}
-        <div className="hidden lg:block">
+        {/* Contact Info + CTA Button */}
+        <div className="hidden items-center gap-4 lg:flex">
+          <a
+            href="tel:+5511989387263"
+            className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-purple-600"
+          >
+            <Phone className="h-4 w-4" />
+            <span>(11) 98938-7263</span>
+          </a>
           <Button
             asChild
-            className="group relative overflow-hidden border border-red-600 bg-red-600/20 text-white transition-all duration-300 hover:bg-red-600 hover:shadow-[0_0_30px_rgba(255,0,0,0.5)]"
+            className="group relative overflow-hidden border-0 bg-gradient-to-r from-purple-600 to-blue-600 text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30"
           >
             <a
-              href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre a Kore Nexus"
+              href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
             >
               <MessageCircle className="mr-2 h-4 w-4" />
               Falar com Consultor
-              <span className="absolute inset-0 -z-10 bg-gradient-to-r from-red-600 to-red-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </a>
           </Button>
         </div>
@@ -70,7 +83,7 @@ export function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="rounded-lg border border-red-900/50 p-2 text-gray-300 transition-colors hover:bg-red-900/20 hover:text-white lg:hidden"
+          className="rounded-lg border border-gray-200 bg-white/80 p-2 text-gray-700 transition-colors hover:bg-gray-100 lg:hidden"
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
         >
           {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -85,7 +98,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="border-t border-red-900/30 bg-black/95 backdrop-blur-xl lg:hidden"
+            className="border-t border-gray-200 glass-strong lg:hidden"
           >
             <div className="flex flex-col gap-2 px-4 py-4">
               {navLinks.map((link) => (
@@ -93,17 +106,34 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg px-4 py-3 text-gray-300 transition-colors hover:bg-red-900/20 hover:text-white"
+                  className="rounded-lg px-4 py-3 text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-700"
                 >
                   {link.label}
                 </Link>
               ))}
+              {/* Mobile Contact Info */}
+              <div className="mt-2 flex flex-col gap-2 border-t border-gray-200 pt-4">
+                <a
+                  href="tel:+5511989387263"
+                  className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-600 hover:bg-gray-50"
+                >
+                  <Phone className="h-4 w-4 text-purple-600" />
+                  (11) 98938-7263
+                </a>
+                <a
+                  href="mailto:Ohany@knexus.qzz.io"
+                  className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-600 hover:bg-gray-50"
+                >
+                  <Mail className="h-4 w-4 text-purple-600" />
+                  Ohany@knexus.qzz.io
+                </a>
+              </div>
               <Button
                 asChild
-                className="mt-2 w-full border border-red-600 bg-red-600/20 text-white hover:bg-red-600"
+                className="mt-2 w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white"
               >
                 <a
-                  href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre a Kore Nexus"
+                  href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
